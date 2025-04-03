@@ -26,15 +26,15 @@ public:
 	/// <param name="_url">The url to download from</param>
 	/// <param name="_outputStr">The data that was downloaded</param>
 	/// <returns>Returns true for a successful download.</returns>
-	bool Download(const char * _url, std::string& _outputStr);
+	bool Download(const char * _pkcURL, std::string& _sOutput);
 
 private:
-	CURL* m_curl = nullptr;//handle
-	static bool m_globalInit;
+	CURL* m_oCURL = nullptr; //handle
+	static bool m_bGlobalInit;
 
 	/// <summary>
 	/// This function is used by Download() for writing data.
 	/// </summary>
-	static size_t WriteData(void* _buffer, size_t _size, size_t _nmemb, void* _param);
+	static size_t WriteData(void* _funcBuffer, size_t _iSize, size_t _iNmemb, void* _funcParam);
 
 };

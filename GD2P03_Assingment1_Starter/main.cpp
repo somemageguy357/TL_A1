@@ -8,19 +8,18 @@
 int main()
 {
 	//Create the window to render to.
-	sf::RenderWindow window(sf::VideoMode(800, 600), "GD2P03 Assignment 1");
+	sf::RenderWindow oWindow(sf::VideoMode(800, 600), "GD2P03 Assignment 1");
 	
-	CDownloader downloader;
-	downloader.Init();
+	CDownloader oDownloader;
+	oDownloader.Init();
 
 	//Downloads the list of URLs and stores them in the string data.
-	std::string data = "";
-	if (downloader.Download(
-		"https://raw.githubusercontent.com/MDS-HugoA/TechLev/main/ImgListSmall.txt",
-		data))
+	std::string sData = "";
+
+	if (oDownloader.Download("https://raw.githubusercontent.com/MDS-HugoA/TechLev/main/ImgListSmall.txt", sData))
 	{
-		std::cout << data << "\n";
-		printf("data length: %zd\n", data.length());
+		std::cout << sData << "\n";
+		printf("data length: %zd\n", sData.length());
 	}
 	else
 	{
@@ -28,44 +27,47 @@ int main()
 	}
 
 	//split the urls
-	size_t pos = 0;
-	size_t oldPos = 0;
-	std::vector<std::string> urls;
-	while (pos != std::string::npos)
+	size_t iPos = 0;
+	size_t iOldPos = 0;
+	std::vector<std::string> sVecURLs;
+
+	while (iPos != std::string::npos)
 	{
-		pos = data.find('\n', oldPos);
-		if (oldPos < data.length())
+		iPos = sData.find('\n', iOldPos);
+		if (iOldPos < sData.length())
 		{
-			urls.push_back(data.substr(oldPos, pos - oldPos));
-			printf("url [%zd] : %s\n", urls.size() - 1, urls[urls.size() - 1].c_str());
-			oldPos = pos + 1;
+			sVecURLs.push_back(sData.substr(iOldPos, iPos - iOldPos));
+			printf("url [%zd] : %s\n", sVecURLs.size() - 1, sVecURLs[sVecURLs.size() - 1].c_str());
+			iOldPos = iPos + 1;
 		}
 	} 
 
-	data = "";
-	downloader.Download(urls[0].c_str(), data);//download the first image
+	sData = "";
+	oDownloader.Download(sVecURLs[0].c_str(), sData);//download the first image
 
-	sf::Texture txtr; 	//Create a texture to load the data into.
-	txtr.loadFromMemory(data.c_str(), data.length());
-	sf::Sprite sprite; 	//Create a sprite to draw the texture to screen.
-	sprite.setTexture(txtr);
-	sprite.setPosition(0, 0);
+	sf::Texture oTexture; 	//Create a texture to load the data into.
+	oTexture.loadFromMemory(sData.c_str(), sData.length());
 
-	while (window.isOpen())
+	sf::Sprite oSprite; 	//Create a sprite to draw the texture to screen.
+	oSprite.setTexture(oTexture);
+	oSprite.setPosition(0, 0);
+
+	while (oWindow.isOpen())
 	{
-		sf::Event winEvent;
-		while (window.pollEvent(winEvent))
+		sf::Event oWinEvent;
+
+		while (oWindow.pollEvent(oWinEvent))
 		{
-			if (winEvent.type == sf::Event::Closed)
+			if (oWinEvent.type == sf::Event::Closed)
 			{
-				window.close();
+				oWindow.close();
 			}
 		}
 
-		window.clear();
+		oWindow.clear();
 		//Drawing the sprite
-		window.draw(sprite);
-		window.display();
+		oWindow.draw(oSprite);
+		oWindow.display();
 	}
 
 	curl_global_cleanup();
