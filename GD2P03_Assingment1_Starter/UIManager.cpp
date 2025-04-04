@@ -3,13 +3,9 @@
 CUIManager* CUIManager::m_poInstance = nullptr;
 std::vector<CUIButton*> CUIManager::m_oVecButtonPtrs(14);
 
-CUIManager::CUIManager()
-{
-}
+CUIManager::CUIManager() {}
 
-CUIManager::~CUIManager()
-{
-}
+CUIManager::~CUIManager() {}
 
 void CUIManager::Update(sf::RenderWindow* _poWindow, bool _bIsClicking)
 {
@@ -31,7 +27,7 @@ void CUIManager::CreateButtons()
 {
 	CUIButton* poNextPageBtn = new CUIButton({ 40.0f, 40.0f }, { 10.0f, 800.0f }, EButtonType::NextPage);
 	CUIButton* poPrevPageBtn = new CUIButton({ 40.0f, 40.0f }, { 70.0f, 800.0f }, EButtonType::PrevPage);
-	CUIButton* poSaveCollageBtn = new CUIButton({ 40.0f, 40.0f }, { 130.0f, 800.0f }, EButtonType::SaveCollage);
+	CUIButton* poSaveCollageBtn = new CUIButton({ 40.0f, 40.0f }, { 130.0f, 820.0f }, EButtonType::SaveCollage);
 	CUIButton* poLoadLargeBtn = new CUIButton({ 40.0f, 40.0f }, { 190.0f, 800.0f }, EButtonType::LoadLarge);
 	CUIButton* poLoadSmallBtn = new CUIButton({ 40.0f, 40.0f }, { 250.0f, 800.0f }, EButtonType::LoadSmall);
 	CUIButton* poDisplay1Btn = new CUIButton({ 40.0f, 40.0f }, { 310.0f, 800.0f }, EButtonType::Display1);

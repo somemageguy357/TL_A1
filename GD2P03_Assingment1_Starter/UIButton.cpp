@@ -1,4 +1,6 @@
 #include "UIButton.h"
+#include "PageManager.h"
+#include "ImageManager.h"
 
 CUIButton::CUIButton(sf::Vector2f _v2fSize, sf::Vector2f _v2fPosition, EButtonType _eButtonType/*, std::string _sButtonText*/)
 {
@@ -50,67 +52,67 @@ void CUIButton::OnClick()
 {
 	if (m_eButtonType == EButtonType::NextPage)
 	{
-
+		CPageManager::GetInstance()->IncrementCurrentPage();
 	}
 
 	else if (m_eButtonType == EButtonType::PrevPage)
 	{
-
+		CPageManager::GetInstance()->DecrementCurrentPage();
 	}
 
 	else if (m_eButtonType == EButtonType::SaveCollage)
 	{
-
+		CImageManager::GetInstance()->SaveCollage();
 	}
 
 	else if (m_eButtonType == EButtonType::LoadSmall)
 	{
-
+		CImageManager::GetInstance()->SetLoadedImageList(EImageList::SmallList);
 	}
 
 	else if (m_eButtonType == EButtonType::LoadLarge)
 	{
-
+		CImageManager::GetInstance()->SetLoadedImageList(EImageList::LargeList);
 	}
 
 	else if (m_eButtonType == EButtonType::Display1)
 	{
-
+		CImageManager::GetInstance()->SetImagesPerPage(1);
 	}
 
 	else if (m_eButtonType == EButtonType::Display4)
 	{
-
+		CImageManager::GetInstance()->SetImagesPerPage(4);
 	}
 
 	else if (m_eButtonType == EButtonType::Display9)
 	{
-
+		CImageManager::GetInstance()->SetImagesPerPage(9);
 	}
 
 	else if (m_eButtonType == EButtonType::Display16)
 	{
-
+		CImageManager::GetInstance()->SetImagesPerPage(16);
 	}
 
 	else if (m_eButtonType == EButtonType::Display25)
 	{
-
+		CImageManager::GetInstance()->SetImagesPerPage(25);
 	}
 
 	else if (m_eButtonType == EButtonType::Display36)
 	{
-
+		CImageManager::GetInstance()->SetImagesPerPage(36);
 	}
 
 	else if (m_eButtonType == EButtonType::Display49)
 	{
-
+		CImageManager::GetInstance()->SetImagesPerPage(49);
 	}
 
 	else if (m_eButtonType == EButtonType::Display64)
 	{
-
+		CImageManager::GetInstance()->SetImagesPerPage(64);
 	}
 
 	else if (m_eButtonType == EButtonType::Quit)

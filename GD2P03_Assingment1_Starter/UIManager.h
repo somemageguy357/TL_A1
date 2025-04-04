@@ -8,9 +8,6 @@
 class CUIManager
 {
 public:
-	CUIManager();
-	~CUIManager();
-
 	static CUIManager* GetInstance()
 	{
 		if (m_poInstance == nullptr)
@@ -30,6 +27,9 @@ private:
 	static CUIManager* m_poInstance;
 
 	static std::vector<CUIButton*> m_oVecButtonPtrs;
+
+	CUIManager();
+	~CUIManager();
 
 	static void CreateButtons();
 };

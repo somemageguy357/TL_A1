@@ -1,14 +1,11 @@
 #include "ImageManager.h"
+#include "WindowManager.h"
 
 CImageManager* CImageManager::m_poInstance = nullptr;
 
-CImageManager::CImageManager()
-{
-}
+CImageManager::CImageManager() {}
 
-CImageManager::~CImageManager()
-{
-}
+CImageManager::~CImageManager() {}
 
 void CImageManager::Render(sf::RenderWindow* _poWindow)
 {
@@ -18,15 +15,37 @@ void CImageManager::Render(sf::RenderWindow* _poWindow)
 	}
 }
 
+void CImageManager::SetImagesPerPage(int _iImagesPerPage)
+{
+	m_iImagesPerPage = _iImagesPerPage;
+}
+
+void CImageManager::SetLoadedImageList(EImageList _eImageList)
+{
+	if (m_eImageList != _eImageList)
+	{
+		m_eImageList = _eImageList;
+
+		if (m_eImageList == EImageList::SmallList)
+		{
+			m_sImageListAddress = "https://raw.githubusercontent.com/MDS-HugoA/TechLev/main/ImgListSmall.txt";
+		}
+
+		else
+		{
+			m_sImageListAddress = "https://raw.githubusercontent.com/MDS-HugoA/TechLev/main/ImgListLarge.txt";
+		}
+
+		//reload images
+	}
+}
+
 void CImageManager::CreateImages(CDownloader* _poDownloader)
 {
 	//Downloads the list of URLs and stores them in the string data.
 	std::string sData = "";
 
-	//small - https://raw.githubusercontent.com/MDS-HugoA/TechLev/main/ImgListSmall.txt
-	//large - https://raw.githubusercontent.com/MDS-HugoA/TechLev/main/ImgListLarge.txt
-
-	if (_poDownloader->Download("https://raw.githubusercontent.com/MDS-HugoA/TechLev/main/ImgListSmall.txt", sData))
+	if (_poDownloader->Download(m_sImageListAddress.c_str(), sData))
 	{
 		std::cout << sData << "\n";
 		printf("data length: %zd\n", sData.length());
@@ -68,14 +87,14 @@ void CImageManager::CreateImages(CDownloader* _poDownloader)
 	}
 }
 
-void CImageManager::RepositionImages(int _iWindowWidth, int _iWindowHeight, int _iImagesPerPage)
+void CImageManager::RepositionImages()
 {
 	int iSpacing = 10; //Spacing between images, as well as padding space for the window borders (both x and y).
-	int iImagesPerLine = sqrt(_iImagesPerPage); //The max number of images to be displayed on each horizontal line.
-	int iHorizontalDisplaySpace = _iWindowWidth - (iSpacing * (iImagesPerLine + 1)); //The remaining space per line that images will take up after space and padding subtractions.
+	int iImagesPerLine = sqrt(m_iImagesPerPage); //The max number of images to be displayed on each horizontal line.
+	int iHorizontalDisplaySpace = CWindowManager::GetInstance()->GetMainWindow()->getSize().x - (iSpacing * (iImagesPerLine + 1)); //The remaining space per line that images will take up after space and padding subtractions.
 	float fImageSize = (float)iHorizontalDisplaySpace / (float)iImagesPerLine; //The width and height for the images.
 
-	int iImagesToDisplay = _iImagesPerPage;
+	int iImagesToDisplay = m_iImagesPerPage;
 
 	if (iImagesToDisplay > m_oVecRectPtrs.size())
 	{
@@ -95,4 +114,19 @@ void CImageManager::RepositionImages(int _iWindowWidth, int _iWindowHeight, int 
 std::vector<sf::RectangleShape*> CImageManager::GetImageShapes()
 {
 	return m_oVecRectPtrs;
+}
+
+void CImageManager::SaveCollage()
+{
+	sf::RenderTexture oRenderTexture;
+	oRenderTexture.create(800, 800);
+
+	for (size_t i = 0; i < CImageManager::GetInstance()->GetImageShapes().size(); i++)
+	{
+		oRenderTexture.draw(*CImageManager::GetInstance()->GetImageShapes()[i]);
+	}
+
+	sf::Image oImage = oRenderTexture.getTexture().copyToImage();
+	oImage.flipVertically();
+	oImage.saveToFile("SavedImages/SavedImage.png");
 }
