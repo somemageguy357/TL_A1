@@ -2,6 +2,9 @@
 
 CUIManager* CUIManager::m_poInstance = nullptr;
 std::vector<CUIButton*> CUIManager::m_oVecButtonPtrs(14);
+std::vector<CUIText*> CUIManager::m_oVecTextPtrs(2);
+CUIText* CUIManager::m_poPageNumberText = nullptr;
+sf::Font* CUIManager::m_poUIFont = nullptr;
 
 CUIManager::CUIManager() {}
 
@@ -21,24 +24,48 @@ void CUIManager::Render(sf::RenderWindow* _poWindow)
 	{
 		m_oVecButtonPtrs[i]->Render(_poWindow);
 	}
+
+	for (size_t i = 0; i < m_oVecTextPtrs.size(); i++)
+	{
+		m_oVecTextPtrs[i]->Render(_poWindow);
+	}
 }
 
-void CUIManager::CreateButtons()
+void CUIManager::UpdatePageNumberText(int _iCurrentPage)
 {
-	CUIButton* poNextPageBtn = new CUIButton({ 40.0f, 40.0f }, { 10.0f, 800.0f }, EButtonType::NextPage);
-	CUIButton* poPrevPageBtn = new CUIButton({ 40.0f, 40.0f }, { 70.0f, 800.0f }, EButtonType::PrevPage);
-	CUIButton* poSaveCollageBtn = new CUIButton({ 40.0f, 40.0f }, { 130.0f, 820.0f }, EButtonType::SaveCollage);
-	CUIButton* poLoadLargeBtn = new CUIButton({ 40.0f, 40.0f }, { 190.0f, 800.0f }, EButtonType::LoadLarge);
-	CUIButton* poLoadSmallBtn = new CUIButton({ 40.0f, 40.0f }, { 250.0f, 800.0f }, EButtonType::LoadSmall);
-	CUIButton* poDisplay1Btn = new CUIButton({ 40.0f, 40.0f }, { 310.0f, 800.0f }, EButtonType::Display1);
-	CUIButton* poDisplay4Btn = new CUIButton({ 40.0f, 40.0f }, { 370.0f, 800.0f }, EButtonType::Display4);
-	CUIButton* poDisplay9Btn = new CUIButton({ 40.0f, 40.0f }, { 430.0f, 800.0f }, EButtonType::Display9);
-	CUIButton* poDisplay16Btn = new CUIButton({ 40.0f, 40.0f }, { 490.0f, 800.0f }, EButtonType::Display16);
-	CUIButton* poDisplay25Btn = new CUIButton({ 40.0f, 40.0f }, { 550.0f, 800.0f }, EButtonType::Display25);
-	CUIButton* poDisplay36Btn = new CUIButton({ 40.0f, 40.0f }, { 610.0f, 800.0f }, EButtonType::Display36);
-	CUIButton* poDisplay49Btn = new CUIButton({ 40.0f, 40.0f }, { 670.0f, 800.0f }, EButtonType::Display49);
-	CUIButton* poDisplay64Btn = new CUIButton({ 40.0f, 40.0f }, { 730.0f, 800.0f }, EButtonType::Display64);
-	CUIButton* poQuitBtn = new CUIButton({ 40.0f, 40.0f }, { 790.0f, 800.0f }, EButtonType::Quit);
+	m_poPageNumberText->SetString(std::to_string(_iCurrentPage));
+}
+
+sf::Font* CUIManager::GetUIFont()
+{
+	return m_poUIFont;
+}
+
+void CUIManager::CreateUIElements()
+{
+	m_poUIFont = new sf::Font();
+	m_poUIFont->loadFromFile("Fonts/Roboto-Light.ttf");
+
+	CUIButton* poNextPageBtn = new CUIButton({ 40.0f, 20.0f }, { 365.0f, 810.0f }, EButtonType::PrevPage, "Prev");
+	m_poPageNumberText = new CUIText(14, { 400.0f, 810.0f }, "1", sf::Color::White);
+	CUIButton* poPrevPageBtn = new CUIButton({ 40.0f, 20.0f }, { 435.0f, 810.0f }, EButtonType::NextPage, "Next");
+
+	CUIButton* poSaveCollageBtn = new CUIButton({ 80.0f, 20.0f }, { 50.0f, 810.0f }, EButtonType::SaveCollage, "Save Image");
+
+	CUIButton* poLoadLargeBtn = new CUIButton({ 80.0f, 20.0f }, { 50.0f, 850.0f }, EButtonType::LoadLarge, "Large List");
+	CUIButton* poLoadSmallBtn = new CUIButton({ 80.0f, 20.0f }, { 50.0f, 880.0f }, EButtonType::LoadSmall, "Small List");
+
+	CUIText* poImagesPerPageText = new CUIText(14, { 732.0f, 826.0f }, "Images Per Page:", sf::Color::White);
+	CUIButton* poDisplay1Btn = new CUIButton({ 20.0f, 20.0f }, { 690.0f, 850.0f }, EButtonType::Display1, "1");
+	CUIButton* poDisplay4Btn = new CUIButton({ 20.0f, 20.0f }, { 720.0f, 850.0f }, EButtonType::Display4, "4");
+	CUIButton* poDisplay9Btn = new CUIButton({ 20.0f, 20.0f }, { 750.0f, 850.0f }, EButtonType::Display9, "9");
+	CUIButton* poDisplay16Btn = new CUIButton({ 20.0f, 20.0f }, { 780.0f, 850.0f }, EButtonType::Display16, "16");
+	CUIButton* poDisplay25Btn = new CUIButton({ 20.0f, 20.0f }, { 690.0f, 880.0f }, EButtonType::Display25, "25");
+	CUIButton* poDisplay36Btn = new CUIButton({ 20.0f, 20.0f }, { 720.0f, 880.0f }, EButtonType::Display36, "36");
+	CUIButton* poDisplay49Btn = new CUIButton({ 20.0f, 20.0f }, { 750.0f, 880.0f }, EButtonType::Display49, "49");
+	CUIButton* poDisplay64Btn = new CUIButton({ 20.0f, 20.0f }, { 780.0f, 880.0f }, EButtonType::Display64, "64");
+
+	CUIButton* poQuitBtn = new CUIButton({ 50.0f, 20.0f }, { 400.0f, 880.0f }, EButtonType::Quit, "Close");
 
 	m_oVecButtonPtrs[0] = poNextPageBtn;
 	m_oVecButtonPtrs[1] = poPrevPageBtn;
@@ -54,4 +81,7 @@ void CUIManager::CreateButtons()
 	m_oVecButtonPtrs[11] = poDisplay49Btn;
 	m_oVecButtonPtrs[12] = poDisplay64Btn;
 	m_oVecButtonPtrs[13] = poQuitBtn;
+
+	m_oVecTextPtrs[0] = m_poPageNumberText;
+	m_oVecTextPtrs[1] = poImagesPerPageText;
 }

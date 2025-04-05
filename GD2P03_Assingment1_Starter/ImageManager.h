@@ -49,7 +49,7 @@ private:
 	//The MAX amount that can be displayed on a page at one time. Must be a rounded square value. 
 	//Accepted values are 1(1x1), 4(2x2), 9(3x3), 16(4x4), 25(5x5), 36(6x6), 49(7x7), and 64(8x8).
 	//This value is set by buttons.
-	int m_iImagesPerPage = 9;
+	int m_iImagesPerPage = 1;
 
 	EImageList m_eImageList = EImageList::SmallList;
 

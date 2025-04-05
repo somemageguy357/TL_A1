@@ -1,4 +1,5 @@
 #include "PageManager.h"
+#include "UIManager.h"
 
 CPageManager* CPageManager::m_poInstance = nullptr;
 
@@ -18,10 +19,10 @@ unsigned int CPageManager::GetMaxPages()
 
 void CPageManager::SetCurrentPage(unsigned int _uiCurrentPage)
 {
-	if (_uiCurrentPage < m_uiMaxPages + 1 && _uiCurrentPage > 1)
+	if (_uiCurrentPage < m_uiMaxPages && _uiCurrentPage > 1)
 	{
 		m_uiCurrentPage = _uiCurrentPage;
-		//update display
+		CUIManager::GetInstance()->UpdatePageNumberText(m_uiCurrentPage);
 	}
 }
 
@@ -32,10 +33,10 @@ unsigned int CPageManager::GetCurrentPage()
 
 void CPageManager::IncrementCurrentPage()
 {
-	if (m_uiCurrentPage < m_uiMaxPages + 1)
+	if (m_uiCurrentPage < m_uiMaxPages)
 	{
 		m_uiCurrentPage += 1;
-		//update display
+		CUIManager::GetInstance()->UpdatePageNumberText(m_uiCurrentPage);
 	}
 }
 
@@ -44,6 +45,6 @@ void CPageManager::DecrementCurrentPage()
 	if (m_uiCurrentPage > 1)
 	{
 		m_uiCurrentPage -= 1;
-		//update display
+		CUIManager::GetInstance()->UpdatePageNumberText(m_uiCurrentPage);
 	}
 }

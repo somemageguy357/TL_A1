@@ -1,16 +1,5 @@
-﻿  ImageManager.cpp
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(93,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(101,43): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(108,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(109,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(110,54): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(110,47): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
+﻿  PageManager.cpp
+  UIButton.cpp
+  main.cpp
+  Generating Code...
   GD2P03_Assingment1_Starter.vcxproj -> C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\x64\Debug\GD2P03_Assingment1_Starter.exe

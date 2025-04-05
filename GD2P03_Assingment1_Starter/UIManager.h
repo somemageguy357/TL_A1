@@ -13,7 +13,7 @@ public:
 		if (m_poInstance == nullptr)
 		{
 			m_poInstance = new CUIManager();
-			CreateButtons();
+			CreateUIElements();
 		}
 
 		return m_poInstance;
@@ -23,13 +23,21 @@ public:
 
 	void Render(sf::RenderWindow* _poWindow);
 
+	void UpdatePageNumberText(int _iCurrentPage);
+
+	sf::Font* GetUIFont();
+
 private:
 	static CUIManager* m_poInstance;
 
 	static std::vector<CUIButton*> m_oVecButtonPtrs;
+	static std::vector<CUIText*> m_oVecTextPtrs;
+	static CUIText* m_poPageNumberText;
+
+	static sf::Font* m_poUIFont;
 
 	CUIManager();
 	~CUIManager();
 
-	static void CreateButtons();
+	static void CreateUIElements();
 };

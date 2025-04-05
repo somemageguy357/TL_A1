@@ -1,6 +1,5 @@
 #pragma once
-#include "SFML/Graphics.hpp"
-#include "UIElement.h"
+#include "UIText.h"
 
 enum class EButtonType
 {
@@ -25,7 +24,7 @@ class CUIButton : public CUIElement
 {
 public:
 	CUIButton() = delete;
-	CUIButton(sf::Vector2f _v2fSize, sf::Vector2f _v2fPosition, EButtonType _eButtonType/*, std::string _sButtonText*/);
+	CUIButton(sf::Vector2f _v2fSize, sf::Vector2f _v2fPosition, EButtonType _eButtonType, std::string _sButtonText, sf::Color _oColour = sf::Color::Black);
 	~CUIButton();
 
 	void Update(sf::RenderWindow* _poWindow, bool _bIsClicking);
@@ -35,6 +34,7 @@ public:
 private:
 	EButtonType m_eButtonType;
 	sf::RectangleShape m_oButtonShape;
+	CUIText* m_poButtonText = nullptr;
 
 	void CheckMouseOverlap(sf::RenderWindow* _poWindow, bool _bIsClicking);
 

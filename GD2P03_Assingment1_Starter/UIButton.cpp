@@ -1,13 +1,15 @@
 #include "UIButton.h"
 #include "PageManager.h"
 #include "ImageManager.h"
+#include "WindowManager.h"
 
-CUIButton::CUIButton(sf::Vector2f _v2fSize, sf::Vector2f _v2fPosition, EButtonType _eButtonType/*, std::string _sButtonText*/)
+CUIButton::CUIButton(sf::Vector2f _v2fSize, sf::Vector2f _v2fPosition, EButtonType _eButtonType, std::string _sButtonText, sf::Color _oColour)
 {
 	m_oButtonShape.setSize(_v2fSize);
+	m_oButtonShape.setOrigin(m_oButtonShape.getGlobalBounds().width / 2, m_oButtonShape.getGlobalBounds().height / 2);
 	m_oButtonShape.setPosition(_v2fPosition);
-
 	m_eButtonType = _eButtonType;
+	m_poButtonText = new CUIText(14, _v2fPosition, _sButtonText, _oColour);
 }
 
 CUIButton::~CUIButton()
@@ -22,6 +24,8 @@ void CUIButton::Update(sf::RenderWindow* _poWindow, bool _bIsClicking)
 void CUIButton::Render(sf::RenderWindow* _poWindow)
 {
 	_poWindow->draw(m_oButtonShape);
+
+	m_poButtonText->Render(_poWindow);
 }
 
 void CUIButton::CheckMouseOverlap(sf::RenderWindow* _poWindow, bool _bIsClicking)
@@ -117,6 +121,6 @@ void CUIButton::OnClick()
 
 	else if (m_eButtonType == EButtonType::Quit)
 	{
-
+		CWindowManager::GetInstance()->GetMainWindow()->close();
 	}
 }

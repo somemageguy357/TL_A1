@@ -71,7 +71,7 @@ void CImageManager::CreateImages(CDownloader* _poDownloader)
 		}
 	}
 
-	for (size_t i = 0; i < sVecURLs.size(); i++)
+	for (size_t i = 0; i < /*sVecURLs.size()*/ 1; i++)
 	{
 		sData = "";
 

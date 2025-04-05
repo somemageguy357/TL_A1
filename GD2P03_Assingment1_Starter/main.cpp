@@ -42,11 +42,10 @@ int main()
 
 		poMainWindow->clear();
 
-		//---UPDATE
+		//Render images on page first.
 		CImageManager::GetInstance()->Render(poMainWindow);
-		CUIManager::GetInstance()->Update(poMainWindow, bIsClicking);
 
-		//---RENDER
+		CUIManager::GetInstance()->Update(poMainWindow, bIsClicking);
 		CUIManager::GetInstance()->Render(poMainWindow);
 
 		poMainWindow->display();
