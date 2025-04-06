@@ -1,6 +1,6 @@
 #include "ImageManager.h"
 
-#include <experimental/filesystem>
+#include <filesystem>
 
 #include "WindowManager.h"
 #include "PageManager.h"
@@ -26,6 +26,7 @@ void CImageManager::SetImagesPerPage(int _iImagesPerPage)
 
 	CPageManager::GetInstance()->SetCurrentPage(1);
 	CPageManager::GetInstance()->SetMaxPages(ceil((float)m_oVecAllImagePtrs.size() / (float)m_iImagesPerPage));
+
 	RepositionImages();
 }
 
@@ -147,11 +148,12 @@ void CImageManager::SaveCollage()
 
 	std::string sSaveFileName = "SavedImage";
 
-	if (std::experimental::filesystem::exists("SavedImages/" + sSaveFileName + ".png") == true)
+	//If an image with the current filename exists: add a number to it. SFML saveToFile overwrites the file instead of creating a new one.
+	if (std::filesystem::exists("SavedImages/" + sSaveFileName + ".png") == true)
 	{
 		int i = 0;
 
-		while (std::experimental::filesystem::exists("SavedImages/" + sSaveFileName + ".png") == true)
+		while (std::filesystem::exists("SavedImages/" + sSaveFileName + ".png") == true)
 		{
 			i += 1;
 			sSaveFileName = "SavedImage (" + std::to_string(i) + ")";

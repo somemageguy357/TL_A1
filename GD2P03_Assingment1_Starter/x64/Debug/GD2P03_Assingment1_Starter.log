@@ -1,2 +1,18 @@
 ﻿  ImageManager.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\experimental\filesystem(30,1): fatal error C1189: #error:  The <experimental/filesystem> header providing std::experimental::filesystem is deprecated by Microsoft and will be REMOVED. It is superseded by the C++17 <filesystem> header providing std::filesystem. You can define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING to acknowledge that you have received this warning.
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(28,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(98,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(105,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(115,68): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(127,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(128,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(129,79): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(129,72): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  GD2P03_Assingment1_Starter.vcxproj -> C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\x64\Debug\GD2P03_Assingment1_Starter.exe

@@ -11,12 +11,13 @@ CPageManager::~CPageManager() {}
 void CPageManager::SetMaxPages(unsigned int _uiMaxPages)
 {
 	m_uiMaxPages = _uiMaxPages;
-	CUIManager::GetInstance()->UpdatePageNumberText(m_uiCurrentPage, m_uiMaxPages);
 
 	if (m_uiCurrentPage > m_uiMaxPages)
 	{
-		SetCurrentPage(m_uiMaxPages);
+		m_uiCurrentPage = m_uiMaxPages;
 	}
+
+	CUIManager::GetInstance()->UpdatePageNumberText(m_uiCurrentPage, m_uiMaxPages);
 }
 
 unsigned int CPageManager::GetMaxPages()
@@ -26,11 +27,10 @@ unsigned int CPageManager::GetMaxPages()
 
 void CPageManager::SetCurrentPage(unsigned int _uiCurrentPage)
 {
-	if (_uiCurrentPage < m_uiMaxPages && _uiCurrentPage > 1)
+	if (_uiCurrentPage < m_uiMaxPages && _uiCurrentPage > 0)
 	{
 		m_uiCurrentPage = _uiCurrentPage;
 		CUIManager::GetInstance()->UpdatePageNumberText(m_uiCurrentPage, m_uiMaxPages);
-		CImageManager::GetInstance()->RepositionImages();
 	}
 }
 
