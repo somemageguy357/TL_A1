@@ -31,9 +31,9 @@ void CUIManager::Render(sf::RenderWindow* _poWindow)
 	}
 }
 
-void CUIManager::UpdatePageNumberText(int _iCurrentPage)
+void CUIManager::UpdatePageNumberText(int _iCurrentPage, int _iMaxPage)
 {
-	m_poPageNumberText->SetString(std::to_string(_iCurrentPage));
+	m_poPageNumberText->SetString(std::to_string(_iCurrentPage) + "/" + std::to_string(_iMaxPage));
 }
 
 sf::Font* CUIManager::GetUIFont()
@@ -46,9 +46,9 @@ void CUIManager::CreateUIElements()
 	m_poUIFont = new sf::Font();
 	m_poUIFont->loadFromFile("Fonts/Roboto-Light.ttf");
 
-	CUIButton* poNextPageBtn = new CUIButton({ 40.0f, 20.0f }, { 365.0f, 810.0f }, EButtonType::PrevPage, "Prev");
-	m_poPageNumberText = new CUIText(14, { 400.0f, 810.0f }, "1", sf::Color::White);
-	CUIButton* poPrevPageBtn = new CUIButton({ 40.0f, 20.0f }, { 435.0f, 810.0f }, EButtonType::NextPage, "Next");
+	CUIButton* poNextPageBtn = new CUIButton({ 40.0f, 20.0f }, { 350.0f, 810.0f }, EButtonType::PrevPage, "Prev");
+	m_poPageNumberText = new CUIText(14, { 400.0f, 810.0f }, "1/1", sf::Color::White);
+	CUIButton* poPrevPageBtn = new CUIButton({ 40.0f, 20.0f }, { 450.0f, 810.0f }, EButtonType::NextPage, "Next");
 
 	CUIButton* poSaveCollageBtn = new CUIButton({ 80.0f, 20.0f }, { 50.0f, 810.0f }, EButtonType::SaveCollage, "Save Image");
 

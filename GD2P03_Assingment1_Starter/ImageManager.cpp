@@ -1,5 +1,9 @@
 #include "ImageManager.h"
+
+#include <experimental/filesystem>
+
 #include "WindowManager.h"
+#include "PageManager.h"
 
 CImageManager* CImageManager::m_poInstance = nullptr;
 
@@ -9,15 +13,20 @@ CImageManager::~CImageManager() {}
 
 void CImageManager::Render(sf::RenderWindow* _poWindow)
 {
-	for (size_t i = 0; i < m_oVecRectPtrs.size(); i++)
+	//Only render the images that are to be displayed to the current page.
+	for (size_t i = 0; i < m_oVecDisplayImagePtrs.size(); i++)
 	{
-		_poWindow->draw(*m_oVecRectPtrs[i]);
+		_poWindow->draw(*m_oVecDisplayImagePtrs[i]);
 	}
 }
 
 void CImageManager::SetImagesPerPage(int _iImagesPerPage)
 {
 	m_iImagesPerPage = _iImagesPerPage;
+
+	CPageManager::GetInstance()->SetCurrentPage(1);
+	CPageManager::GetInstance()->SetMaxPages(ceil((float)m_oVecAllImagePtrs.size() / (float)m_iImagesPerPage));
+	RepositionImages();
 }
 
 void CImageManager::SetLoadedImageList(EImageList _eImageList)
@@ -58,75 +67,98 @@ void CImageManager::CreateImages(CDownloader* _poDownloader)
 	//split the urls
 	size_t iPos = 0;
 	size_t iOldPos = 0;
-	std::vector<std::string> sVecURLs;
+	std::vector<std::string> oVecURLs;
 
 	while (iPos != std::string::npos)
 	{
 		iPos = sData.find('\n', iOldPos);
 		if (iOldPos < sData.length())
 		{
-			sVecURLs.push_back(sData.substr(iOldPos, iPos - iOldPos));
-			printf("url [%zd] : %s\n", sVecURLs.size() - 1, sVecURLs[sVecURLs.size() - 1].c_str());
+			oVecURLs.push_back(sData.substr(iOldPos, iPos - iOldPos));
+			printf("url [%zd] : %s\n", oVecURLs.size() - 1, oVecURLs[oVecURLs.size() - 1].c_str());
 			iOldPos = iPos + 1;
 		}
 	}
 
-	for (size_t i = 0; i < /*sVecURLs.size()*/ 1; i++)
+	for (size_t i = 0; i < oVecURLs.size(); i++)
 	{
 		sData = "";
 
-		_poDownloader->Download(sVecURLs[i].c_str(), sData);
+		_poDownloader->Download(oVecURLs[i].c_str(), sData);
 
 		sf::Texture* poTexture = new sf::Texture();
 		m_oVecTexPtrs.push_back(poTexture);
 		poTexture->loadFromMemory(sData.c_str(), sData.length());
 
 		sf::RectangleShape* poRect = new sf::RectangleShape();
-		m_oVecRectPtrs.push_back(poRect);
+		m_oVecAllImagePtrs.push_back(poRect);
 		poRect->setTexture(poTexture);
 	}
+
+	CPageManager::GetInstance()->SetMaxPages(ceil((float)m_oVecAllImagePtrs.size() / (float)m_iImagesPerPage));
 }
 
 void CImageManager::RepositionImages()
 {
+	//Image position and size data.
 	int iSpacing = 10; //Spacing between images, as well as padding space for the window borders (both x and y).
 	int iImagesPerLine = sqrt(m_iImagesPerPage); //The max number of images to be displayed on each horizontal line.
 	int iHorizontalDisplaySpace = CWindowManager::GetInstance()->GetMainWindow()->getSize().x - (iSpacing * (iImagesPerLine + 1)); //The remaining space per line that images will take up after space and padding subtractions.
 	float fImageSize = (float)iHorizontalDisplaySpace / (float)iImagesPerLine; //The width and height for the images.
 
+	//
 	int iImagesToDisplay = m_iImagesPerPage;
+	int iPageStartingImage = (CPageManager::GetInstance()->GetCurrentPage() - 1) * m_iImagesPerPage;
 
-	if (iImagesToDisplay > m_oVecRectPtrs.size())
+	if (iImagesToDisplay > m_oVecAllImagePtrs.size() - iPageStartingImage)
 	{
-		iImagesToDisplay = m_oVecRectPtrs.size();
+		iImagesToDisplay = m_oVecAllImagePtrs.size() - iPageStartingImage;
 	}
 
+	//Clear the image display vector and resize it to match the number of images that are to be displayed.
+	m_oVecDisplayImagePtrs.clear();
+	m_oVecDisplayImagePtrs.resize(iImagesToDisplay);
+
+	//Reposition and resize all the images that are to be displayed.
 	for (size_t i = 0; i < iImagesToDisplay; i++)
 	{
-		m_oVecRectPtrs[i]->setSize(sf::Vector2f(fImageSize, fImageSize));
+		m_oVecAllImagePtrs[i + iPageStartingImage]->setSize(sf::Vector2f(fImageSize, fImageSize));
 
 		int iXPos = (iSpacing * ((i % iImagesPerLine) + 1)) + (fImageSize * (i % iImagesPerLine));
 		int iYPos = (iSpacing * ((i / iImagesPerLine) + 1)) + (fImageSize * (i / iImagesPerLine));
-		m_oVecRectPtrs[i]->setPosition(sf::Vector2f(iXPos, iYPos));
-	}
-}
+		m_oVecAllImagePtrs[i + iPageStartingImage]->setPosition(sf::Vector2f(iXPos, iYPos));
 
-std::vector<sf::RectangleShape*> CImageManager::GetImageShapes()
-{
-	return m_oVecRectPtrs;
+		m_oVecDisplayImagePtrs[i] = m_oVecAllImagePtrs[i + iPageStartingImage];
+	}
 }
 
 void CImageManager::SaveCollage()
 {
+	//Create a RenderTexture that will draw the display images to it.
+	//The RenderWindow is 800x900 and creating an Image/Texture of that will include the UI.
+	//The full space for the display images is 800x800.
 	sf::RenderTexture oRenderTexture;
-	oRenderTexture.create(800, 800);
+	oRenderTexture.create(CWindowManager::GetInstance()->GetMainWindow()->getSize().x, CWindowManager::GetInstance()->GetMainWindow()->getSize().y - 100);
 
-	for (size_t i = 0; i < CImageManager::GetInstance()->GetImageShapes().size(); i++)
+	for (size_t i = 0; i < m_oVecDisplayImagePtrs.size(); i++)
 	{
-		oRenderTexture.draw(*CImageManager::GetInstance()->GetImageShapes()[i]);
+		oRenderTexture.draw(*m_oVecDisplayImagePtrs[i]);
+	}
+
+	std::string sSaveFileName = "SavedImage";
+
+	if (std::experimental::filesystem::exists("SavedImages/" + sSaveFileName + ".png") == true)
+	{
+		int i = 0;
+
+		while (std::experimental::filesystem::exists("SavedImages/" + sSaveFileName + ".png") == true)
+		{
+			i += 1;
+			sSaveFileName = "SavedImage (" + std::to_string(i) + ")";
+		}
 	}
 
 	sf::Image oImage = oRenderTexture.getTexture().copyToImage();
 	oImage.flipVertically();
-	oImage.saveToFile("SavedImages/SavedImage.png");
+	oImage.saveToFile("SavedImages/" + sSaveFileName + ".png");
 }

@@ -23,7 +23,7 @@ public:
 
 	void Render(sf::RenderWindow* _poWindow);
 
-	void UpdatePageNumberText(int _iCurrentPage);
+	void UpdatePageNumberText(int _iCurrentPage, int _iMaxPage);
 
 	sf::Font* GetUIFont();
 

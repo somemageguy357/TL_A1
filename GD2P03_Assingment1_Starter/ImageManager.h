@@ -36,20 +36,19 @@ public:
 
 	void RepositionImages();
 
-	std::vector<sf::RectangleShape*> GetImageShapes();
-
 	void SaveCollage();
 
 private:
 	static CImageManager* m_poInstance;
 
 	std::vector<sf::Texture*> m_oVecTexPtrs;
-	std::vector<sf::RectangleShape*> m_oVecRectPtrs;
+	std::vector<sf::RectangleShape*> m_oVecAllImagePtrs;
+	std::vector<sf::RectangleShape*> m_oVecDisplayImagePtrs;
 
 	//The MAX amount that can be displayed on a page at one time. Must be a rounded square value. 
 	//Accepted values are 1(1x1), 4(2x2), 9(3x3), 16(4x4), 25(5x5), 36(6x6), 49(7x7), and 64(8x8).
 	//This value is set by buttons.
-	int m_iImagesPerPage = 1;
+	int m_iImagesPerPage = 9;
 
 	EImageList m_eImageList = EImageList::SmallList;
 

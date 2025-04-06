@@ -23,4 +23,6 @@ void CUIText::Render(sf::RenderWindow* _poWindow)
 void CUIText::SetString(std::string _sString)
 {
 	m_oText.setString(_sString);
+	m_oText.setOrigin(m_oText.getGlobalBounds().width / 2, (m_oText.getGlobalBounds().height / 2) + 3);
+	m_oText.setPosition(m_oText.getPosition());
 }
