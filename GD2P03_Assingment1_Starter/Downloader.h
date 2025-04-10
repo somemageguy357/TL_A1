@@ -5,6 +5,7 @@
 
 #include <string.h>
 #include <iostream>
+#include <vector>
 
 /*This is a class which uses libcurl to download data from a url to string.
 	The init function should be called before downloading. 
@@ -29,7 +30,7 @@ public:
 	bool Download(const char * _pkcURL, std::string& _sOutput);
 
 private:
-	CURL* m_oCURL = nullptr; //handle
+	std::vector<CURL*> m_oVecCURLPtrs; //handle
 	static bool m_bGlobalInit;
 
 	/// <summary>

@@ -4,6 +4,7 @@
 
 #include "WindowManager.h"
 #include "PageManager.h"
+#include "ThreadPool.h"
 
 CImageManager* CImageManager::m_poInstance = nullptr;
 
@@ -76,17 +77,25 @@ void CImageManager::CreateImages(CDownloader* _poDownloader)
 		if (iOldPos < sData.length())
 		{
 			oVecURLs.push_back(sData.substr(iOldPos, iPos - iOldPos));
-			printf("url [%zd] : %s\n", oVecURLs.size() - 1, oVecURLs[oVecURLs.size() - 1].c_str());
+			//printf("url [%zd] : %s\n", oVecURLs.size() - 1, oVecURLs[oVecURLs.size() - 1].c_str());
 			iOldPos = iPos + 1;
 		}
 	}
 
-	for (size_t i = 0; i < oVecURLs.size(); i++)
+	CThreadPool oThreadPool;
+
+	for (size_t i = 0; i < /*oVecURLs.size()*/1; i++)
 	{
 		sData = "";
+		oThreadPool.Submit(CTask(_poDownloader, &oVecURLs[i], &sData));
+		//_poDownloader->Download(oVecURLs[i].c_str(), sData);
+	}
 
-		_poDownloader->Download(oVecURLs[i].c_str(), sData);
+	while (oThreadPool.GetTaskProcessed() < oVecURLs.size()) {}
+	oThreadPool.Stop();
 
+	for (size_t i = 0; i < oVecURLs.size(); i++)
+	{
 		sf::Texture* poTexture = new sf::Texture();
 		m_oVecTexPtrs.push_back(poTexture);
 		poTexture->loadFromMemory(sData.c_str(), sData.length());

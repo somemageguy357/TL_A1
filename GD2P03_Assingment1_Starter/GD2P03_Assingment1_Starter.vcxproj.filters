@@ -25,6 +25,12 @@
     <Filter Include="Header Files\Managers">
       <UniqueIdentifier>{be2a305e-0e34-4d8c-ae34-f5298b82abbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Threads">
+      <UniqueIdentifier>{37f2802f-56d9-4fb4-8cbe-11c842ea95f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Threads">
+      <UniqueIdentifier>{f3ff5ab6-838a-4770-8c72-a71f2bd39c50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,6 +60,15 @@
     <ClCompile Include="UIText.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="SafeQueue.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UIElement.h">
@@ -79,6 +94,15 @@
     </ClInclude>
     <ClInclude Include="UIText.h">
       <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeQueue.h">
+      <Filter>Header Files\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Header Files\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Header Files\Threads</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

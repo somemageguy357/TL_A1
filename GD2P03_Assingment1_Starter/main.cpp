@@ -7,6 +7,7 @@
 #include "ImageManager.h"
 #include "UIManager.h"
 #include "WindowManager.h"
+#include "ThreadPool.h"
 
 #include <vector>
 
