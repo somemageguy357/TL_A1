@@ -91,6 +91,10 @@ void CImageManager::CreateImages(CDownloader* _poDownloader)
 		m_oVecTexPtrs.push_back(poTexture);
 		poTexture->loadFromMemory(sData.c_str(), sData.length());
 
+		//maybe don't assign textures here, only when loading each page.
+		//program defaults to 9 images. only make 9 rectshapes to begin with.
+		//create as many textures as required = to the number downloaded.
+		//if 16 images are chosen, create (16 - rectvector.size()) rectshapes if 16 > current size.
 		sf::RectangleShape* poRect = new sf::RectangleShape();
 		m_oVecAllImagePtrs.push_back(poRect);
 		poRect->setTexture(poTexture);

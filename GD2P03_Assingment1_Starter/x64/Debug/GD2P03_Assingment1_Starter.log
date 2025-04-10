@@ -1,16 +1,16 @@
 ﻿  ImageManager.cpp
 C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(28,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(98,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(105,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(115,68): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(127,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(128,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(129,79): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(103,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(110,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(120,68): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(132,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(133,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(134,79): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(129,72): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(134,72): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
