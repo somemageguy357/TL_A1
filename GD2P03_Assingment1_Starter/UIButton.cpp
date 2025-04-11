@@ -1,15 +1,27 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2025 Media Design School
+File Name : UIButton.cpp
+Description : Contains function definitions for UIButton.h.
+Author : Connor Galvin
+Mail : Connor.Galvin@mds.ac.nz
+**************************************************************************/
+
 #include "UIButton.h"
 #include "PageManager.h"
 #include "ImageManager.h"
 #include "WindowManager.h"
 
-CUIButton::CUIButton(sf::Vector2f _v2fSize, sf::Vector2f _v2fPosition, EButtonType _eButtonType, std::string _sButtonText, sf::Color _oColour)
+CUIButton::CUIButton(sf::Vector2f _v2fSize, sf::Vector2f _v2fPosition, EButtonType _eButtonType, std::string _sButtonText, sf::Color _oTextColour)
 {
 	m_oButtonShape.setSize(_v2fSize);
 	m_oButtonShape.setOrigin(m_oButtonShape.getGlobalBounds().width / 2, m_oButtonShape.getGlobalBounds().height / 2);
 	m_oButtonShape.setPosition(_v2fPosition);
 	m_eButtonType = _eButtonType;
-	m_poButtonText = new CUIText(14, _v2fPosition, _sButtonText, _oColour);
+	m_poButtonText = new CUIText(14, _v2fPosition, _sButtonText, _oTextColour);
 }
 
 CUIButton::~CUIButton()
@@ -71,12 +83,14 @@ void CUIButton::OnClick()
 
 	else if (m_eButtonType == EButtonType::LoadSmall)
 	{
-		CImageManager::GetInstance()->SetLoadedImageList(EImageList::SmallList);
+		//disabled
+		//CImageManager::GetInstance()->SetLoadedImageList(EImageList::SmallList);
 	}
 
 	else if (m_eButtonType == EButtonType::LoadLarge)
 	{
-		CImageManager::GetInstance()->SetLoadedImageList(EImageList::LargeList);
+		//disabled
+		//CImageManager::GetInstance()->SetLoadedImageList(EImageList::LargeList);
 	}
 
 	else if (m_eButtonType == EButtonType::Display1)

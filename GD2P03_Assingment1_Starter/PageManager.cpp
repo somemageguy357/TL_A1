@@ -1,3 +1,15 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2025 Media Design School
+File Name : PageManager.cpp
+Description : Contains function definitions for PageManager.h.
+Author : Connor Galvin
+Mail : Connor.Galvin@mds.ac.nz
+**************************************************************************/
+
 #include "PageManager.h"
 #include "UIManager.h"
 #include "ImageManager.h"

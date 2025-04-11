@@ -1,3 +1,15 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2025 Media Design School
+File Name : ImageManager.cpp
+Description : Contains function definitions for ImageManager.h.
+Author : Connor Galvin
+Mail : Connor.Galvin@mds.ac.nz
+**************************************************************************/
+
 #include "ImageManager.h"
 
 #include <filesystem>
@@ -10,7 +22,18 @@ CImageManager* CImageManager::m_poInstance = nullptr;
 
 CImageManager::CImageManager() {}
 
-CImageManager::~CImageManager() {}
+CImageManager::~CImageManager() 
+{
+	for (size_t i = 0; i < m_oVecAllImagePtrs.size(); i++)
+	{
+		delete m_oVecAllImagePtrs[i];
+	}
+
+	for (size_t i = 0; i < m_oVecTexPtrs.size(); i++)
+	{
+		delete m_oVecTexPtrs[i];
+	}
+}
 
 void CImageManager::Render(sf::RenderWindow* _poWindow)
 {
@@ -85,6 +108,7 @@ void CImageManager::CreateImages(CDownloader* _poDownloader)
 		}
 	}
 
+	//Thread pool for downloading the images.
 	CThreadPool oThreadPool;
 	std::vector<std::string> oVecDataStrings(oVecURLs.size());
 
@@ -103,10 +127,6 @@ void CImageManager::CreateImages(CDownloader* _poDownloader)
 		m_oVecTexPtrs.push_back(poTexture);
 		poTexture->loadFromMemory(oVecDataStrings[i].c_str(), oVecDataStrings[i].length());
 
-		//maybe don't assign textures here, only when loading each page.
-		//program defaults to 9 images. only make 9 rectshapes to begin with.
-		//create as many textures as required = to the number downloaded.
-		//if 16 images are chosen, create (16 - rectvector.size()) rectshapes if 16 > current size.
 		sf::RectangleShape* poRect = new sf::RectangleShape();
 		m_oVecAllImagePtrs.push_back(poRect);
 		poRect->setTexture(poTexture);
@@ -123,7 +143,6 @@ void CImageManager::RepositionImages()
 	int iHorizontalDisplaySpace = CWindowManager::GetInstance()->GetMainWindow()->getSize().x - (iSpacing * (iImagesPerLine + 1)); //The remaining space per line that images will take up after space and padding subtractions.
 	float fImageSize = (float)iHorizontalDisplaySpace / (float)iImagesPerLine; //The width and height for the images.
 
-	//
 	int iImagesToDisplay = m_iImagesPerPage;
 	int iPageStartingImage = (CPageManager::GetInstance()->GetCurrentPage() - 1) * m_iImagesPerPage;
 

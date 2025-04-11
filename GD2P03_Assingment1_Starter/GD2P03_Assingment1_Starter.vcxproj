@@ -157,11 +157,9 @@
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PageManager.cpp" />
-    <ClCompile Include="SafeQueue.cpp" />
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="UIButton.cpp" />
-    <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="WindowManager.cpp" />
@@ -174,7 +172,6 @@
     <ClInclude Include="Task.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="UIButton.h" />
-    <ClInclude Include="UIElement.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="WindowManager.h" />

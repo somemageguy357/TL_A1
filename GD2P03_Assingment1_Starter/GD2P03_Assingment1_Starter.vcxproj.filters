@@ -36,9 +36,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UIElement.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
     <ClCompile Include="UIButton.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
@@ -60,9 +57,6 @@
     <ClCompile Include="UIText.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SafeQueue.cpp">
-      <Filter>Source Files\Threads</Filter>
-    </ClCompile>
     <ClCompile Include="Task.cpp">
       <Filter>Source Files\Threads</Filter>
     </ClCompile>
@@ -71,9 +65,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UIElement.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
     <ClInclude Include="UIButton.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>

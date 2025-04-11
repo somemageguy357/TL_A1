@@ -1,3 +1,15 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2025 Media Design School
+File Name : SafeQueue.h
+Description : A thread safe queue that is used for thread pools.
+Author : Connor Galvin
+Mail : Connor.Galvin@mds.ac.nz
+**************************************************************************/
+
 #include <queue>
 #include <mutex>
 
@@ -8,7 +20,18 @@ public:
 	CSafeQueue() {}
 	~CSafeQueue() {}
 
+	/// <summary>
+	/// Pushes the given value into the queue.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="_oValue:">The value added to the queue.</param>
 	void Push(const T& _oValue);
+
+	/// <summary>
+	/// Sets the given value to the first element and removes the first element from the queue if it is not empty.
+	/// </summary>
+	/// <param name="_oValue:">The value that holds the first element of the queue.</param>
+	/// <returns>False if the queue is empty, true if not.</returns>
 	bool Pop(T& _oValue);
 
 	bool BlockPop(T& _oValue);

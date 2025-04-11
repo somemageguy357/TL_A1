@@ -1,4 +1,16 @@
-//This define is required for anywhere both SFML and libcurl are included. 
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2025 Media Design School
+File Name : main.cpp
+Description : Runs the main loop of the program.
+Author : Connor Galvin
+Mail : Connor.Galvin@mds.ac.nz
+**************************************************************************/
+
+//This define is required for anywhere both SFML and libcurl are included.
 //It prevents multiple definitions of functions min and max
 #define NOMINMAX 
 #include <SFML/Graphics.hpp>
@@ -16,9 +28,11 @@ int main()
 	//Get a pointer to the main window.
 	sf::RenderWindow* poMainWindow = CWindowManager::GetInstance()->GetMainWindow();
 	
+	//Initializes the downloader.
 	CDownloader* poDownloader = new CDownloader();
 	poDownloader->Init();
 
+	//Creates and positions the images.
 	CImageManager::GetInstance()->CreateImages(poDownloader);
 	CImageManager::GetInstance()->RepositionImages();
 
@@ -30,6 +44,7 @@ int main()
 
 		while (poMainWindow->pollEvent(oWindowEvent) == true)
 		{
+			//Gets mouse left mouse click.
 			if (oWindowEvent.type == sf::Event::MouseButtonPressed && oWindowEvent.mouseButton.button == sf::Mouse::Left)
 			{
 				bIsClicking = true;

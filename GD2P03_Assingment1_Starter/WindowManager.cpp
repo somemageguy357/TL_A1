@@ -1,3 +1,15 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2025 Media Design School
+File Name : WindowManager.cpp
+Description : Contains function definitions for WindowManager.h.
+Author : Connor Galvin
+Mail : Connor.Galvin@mds.ac.nz
+**************************************************************************/
+
 #include "WindowManager.h"
 
 CWindowManager* CWindowManager::m_poInstance = nullptr;

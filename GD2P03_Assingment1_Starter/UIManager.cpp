@@ -1,3 +1,15 @@
+/***********************************************************************
+Bachelor of Software Engineering
+Media Design School
+Auckland
+New Zealand
+(c) 2025 Media Design School
+File Name : UIManager.cpp
+Description : Contains function definitions for UIManager.h.
+Author : Connor Galvin
+Mail : Connor.Galvin@mds.ac.nz
+**************************************************************************/
+
 #include "UIManager.h"
 
 CUIManager* CUIManager::m_poInstance = nullptr;
