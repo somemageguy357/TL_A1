@@ -83,22 +83,22 @@ void CImageManager::CreateImages(CDownloader* _poDownloader)
 	}
 
 	CThreadPool oThreadPool;
-
-	for (size_t i = 0; i < /*oVecURLs.size()*/1; i++)
+	std::vector<std::string> oVecDataStrings(2);
+	for (size_t i = 0; i < /*oVecURLs.size()*/2; i++)
 	{
-		sData = "";
-		oThreadPool.Submit(CTask(_poDownloader, &oVecURLs[i], &sData));
+		oVecDataStrings[i] = "";
+		oThreadPool.Submit(CTask(_poDownloader, &oVecURLs[i], &oVecDataStrings[i]));
 		//_poDownloader->Download(oVecURLs[i].c_str(), sData);
 	}
 
-	while (oThreadPool.GetTaskProcessed() < oVecURLs.size()) {}
+	while (oThreadPool.GetTaskProcessed() < 2) {}
 	oThreadPool.Stop();
 
-	for (size_t i = 0; i < oVecURLs.size(); i++)
+	for (size_t i = 0; i < /*oVecURLs.size()*/2; i++)
 	{
 		sf::Texture* poTexture = new sf::Texture();
 		m_oVecTexPtrs.push_back(poTexture);
-		poTexture->loadFromMemory(sData.c_str(), sData.length());
+		poTexture->loadFromMemory(oVecDataStrings[i].c_str(), oVecDataStrings[i].length());
 
 		//maybe don't assign textures here, only when loading each page.
 		//program defaults to 9 images. only make 9 rectshapes to begin with.

@@ -1,2 +1,18 @@
-﻿  Downloader.cpp
+﻿  ImageManager.cpp
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(29,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(112,47): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(119,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(129,68): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(141,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(142,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(143,79): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\GD2P03_Assingment1_Starter\ImageManager.cpp(143,72): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   GD2P03_Assingment1_Starter.vcxproj -> C:\Users\Administrator\Desktop\course\Semester3\Network\Assignment1\GD2P03-Assignment1-StarterProject\x64\Debug\GD2P03_Assingment1_Starter.exe

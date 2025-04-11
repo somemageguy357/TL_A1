@@ -14,7 +14,10 @@ public:
 	virtual void DoWork()
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
-		m_poDownloader->Download(m_psURL->c_str(), *m_psOutput);
+		CDownloader oDownloader;
+		oDownloader.Init();
+		oDownloader.Download(m_psURL->c_str(), *m_psOutput);
+		//m_poDownloader->Download(m_psURL->c_str(), *m_psOutput);
 	}
 
 private:

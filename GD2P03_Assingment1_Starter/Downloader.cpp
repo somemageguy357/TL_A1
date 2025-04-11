@@ -2,9 +2,7 @@
 
 bool CDownloader::m_bGlobalInit = false;
 
-CDownloader::CDownloader()
-{
-}
+CDownloader::CDownloader() {}
 
 CDownloader::~CDownloader()
 {
@@ -29,7 +27,7 @@ bool CDownloader::Download(const char* _pkcURL, std::string& _sOutput)
 	CURL* poCURL = curl_easy_init();
 	m_oVecCURLPtrs.push_back(poCURL);
 
-	if (poCURL != nullptr)
+	if (poCURL)
 	{
 		CURLcode oRes;
 		curl_easy_setopt(poCURL, CURLOPT_URL, _pkcURL);
@@ -45,6 +43,7 @@ bool CDownloader::Download(const char* _pkcURL, std::string& _sOutput)
 		}
 
 		curl_easy_cleanup(poCURL);
+
 		return oRes == CURLE_OK;
 	}
 	return false;
