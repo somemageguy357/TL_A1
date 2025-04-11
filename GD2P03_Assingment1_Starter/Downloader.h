@@ -30,7 +30,7 @@ public:
 	bool Download(const char * _pkcURL, std::string& _sOutput);
 
 private:
-	std::vector<CURL*> m_oVecCURLPtrs; //handle
+	CURL* m_poCURL = nullptr; //handle
 	static bool m_bGlobalInit;
 
 	/// <summary>

@@ -42,7 +42,7 @@ int CThreadPool::GetTaskProcessed()
 
 void CThreadPool::WorkerThread()
 {
-	CTask oTask(nullptr, nullptr, nullptr);
+	CTask oTask(nullptr, nullptr);
 
 	while (m_bFinished == false)
 	{

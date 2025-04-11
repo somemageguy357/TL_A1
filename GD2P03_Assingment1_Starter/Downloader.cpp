@@ -6,10 +6,7 @@ CDownloader::CDownloader() {}
 
 CDownloader::~CDownloader()
 {
-	for (size_t i = 0; i < m_oVecCURLPtrs.size(); i++)
-	{
-		curl_easy_cleanup(m_oVecCURLPtrs[i]);
-	}
+	curl_easy_cleanup(m_poCURL);
 }
 
 void CDownloader::Init()
@@ -24,25 +21,24 @@ void CDownloader::Init()
 bool CDownloader::Download(const char* _pkcURL, std::string& _sOutput)
 {
 	//This is the curl handle, each thread should have its own handle.
-	CURL* poCURL = curl_easy_init();
-	m_oVecCURLPtrs.push_back(poCURL);
+	CURL* m_poCURL = curl_easy_init();
 
-	if (poCURL)
+	if (m_poCURL)
 	{
 		CURLcode oRes;
-		curl_easy_setopt(poCURL, CURLOPT_URL, _pkcURL);
-		curl_easy_setopt(poCURL, CURLOPT_WRITEFUNCTION, CDownloader::WriteData);
-		curl_easy_setopt(poCURL, CURLOPT_WRITEDATA, &_sOutput);
-		curl_easy_setopt(poCURL, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+		curl_easy_setopt(m_poCURL, CURLOPT_URL, _pkcURL);
+		curl_easy_setopt(m_poCURL, CURLOPT_WRITEFUNCTION, CDownloader::WriteData);
+		curl_easy_setopt(m_poCURL, CURLOPT_WRITEDATA, &_sOutput);
+		curl_easy_setopt(m_poCURL, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 		//curl_easy_setopt(poCURL, CURLOPT_VERBOSE, 1L); //uncomment for verbose messages, good for debug
-		oRes = curl_easy_perform(poCURL);
+		oRes = curl_easy_perform(m_poCURL);
 
 		if (oRes != CURLE_OK)
 		{
 			std::cerr << " CURL error: " << oRes << "\n";
 		}
 
-		curl_easy_cleanup(poCURL);
+		curl_easy_cleanup(m_poCURL);
 
 		return oRes == CURLE_OK;
 	}

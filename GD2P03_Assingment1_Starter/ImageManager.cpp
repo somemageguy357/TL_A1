@@ -47,20 +47,23 @@ void CImageManager::SetLoadedImageList(EImageList _eImageList)
 			m_sImageListAddress = "https://raw.githubusercontent.com/MDS-HugoA/TechLev/main/ImgListLarge.txt";
 		}
 
-		//reload images
+		CreateImages(m_poDownloader);
 	}
 }
 
 void CImageManager::CreateImages(CDownloader* _poDownloader)
 {
+	m_poDownloader = _poDownloader;
+
 	//Downloads the list of URLs and stores them in the string data.
 	std::string sData = "";
 
-	if (_poDownloader->Download(m_sImageListAddress.c_str(), sData))
+	if (m_poDownloader->Download(m_sImageListAddress.c_str(), sData))
 	{
 		std::cout << sData << "\n";
 		printf("data length: %zd\n", sData.length());
 	}
+
 	else
 	{
 		printf("data failed to download");
@@ -77,24 +80,24 @@ void CImageManager::CreateImages(CDownloader* _poDownloader)
 		if (iOldPos < sData.length())
 		{
 			oVecURLs.push_back(sData.substr(iOldPos, iPos - iOldPos));
-			//printf("url [%zd] : %s\n", oVecURLs.size() - 1, oVecURLs[oVecURLs.size() - 1].c_str());
+			printf("url [%zd] : %s\n", oVecURLs.size() - 1, oVecURLs[oVecURLs.size() - 1].c_str());
 			iOldPos = iPos + 1;
 		}
 	}
 
 	CThreadPool oThreadPool;
-	std::vector<std::string> oVecDataStrings(2);
-	for (size_t i = 0; i < /*oVecURLs.size()*/2; i++)
+	std::vector<std::string> oVecDataStrings(oVecURLs.size());
+
+	for (size_t i = 0; i < oVecURLs.size(); i++)
 	{
 		oVecDataStrings[i] = "";
-		oThreadPool.Submit(CTask(_poDownloader, &oVecURLs[i], &oVecDataStrings[i]));
-		//_poDownloader->Download(oVecURLs[i].c_str(), sData);
+		oThreadPool.Submit(CTask(&oVecURLs[i], &oVecDataStrings[i]));
 	}
 
-	while (oThreadPool.GetTaskProcessed() < 2) {}
+	while (oThreadPool.GetTaskProcessed() < oVecURLs.size()) {}
 	oThreadPool.Stop();
 
-	for (size_t i = 0; i < /*oVecURLs.size()*/2; i++)
+	for (size_t i = 0; i < oVecURLs.size(); i++)
 	{
 		sf::Texture* poTexture = new sf::Texture();
 		m_oVecTexPtrs.push_back(poTexture);

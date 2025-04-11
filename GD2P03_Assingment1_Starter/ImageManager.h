@@ -41,6 +41,8 @@ public:
 private:
 	static CImageManager* m_poInstance;
 
+	CDownloader* m_poDownloader = nullptr;
+
 	std::vector<sf::Texture*> m_oVecTexPtrs;
 	std::vector<sf::RectangleShape*> m_oVecAllImagePtrs;
 	std::vector<sf::RectangleShape*> m_oVecDisplayImagePtrs;
